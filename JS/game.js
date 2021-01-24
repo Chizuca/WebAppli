@@ -1,6 +1,7 @@
 //afin d'appeller le canvas dans le index
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const body = document.querySelector('body');
 //redimenssioné en fonction du client
 canvas.width = document.documentElement.clientWidth || document.body.clientWidth;
 canvas.height = document.documentElement.clientHeight || document.body.clientHeight;
@@ -13,6 +14,27 @@ let movey = 2;
 let centerX = canvas.width / 2;
 let centerY = canvas.height / 2;
 
+//TouchStart = evenement du au click sur l'écran
+//ToucheMove = evenement après le click glisser le doight sur l'écran
+//TouchEnd = evenement fin du click on relève le doight
+//touchCancel = stop le touche move ou un evenement
+body.addEventListener('touchstart',(e) =>{
+    console.log("Clicked");
+    let nvCercle = document.createElement('div');
+    nvCercle.style.width = '50px';
+    nvCercle.style.height = '50px';
+    nvCercle.style.background = 'red';
+    nvCercle.style.position = 'absolute';
+    nvCercle.style.borderRadius = '50%';
+    nvCercle.style.top = '0px';
+    nvCercle.style.left = '0px';
+    let posX = (e.touches[0].clientX - 25);
+    let posY = (e.touches[0].clientY - 25);
+
+    nvCercle.style.transform = `translate(${posX}px, ${posY}px)`;
+    body.appendChild(nvCercle);
+    
+})
 function gameLoop(){
     //fonction qui permet d'avoir un fond gris
     ctx.fillStyle = "grey";
@@ -30,21 +52,22 @@ function gameLoop(){
     }
     x += movex;
     y += movey;
-   createCircle();
 }
 setInterval(gameLoop,1000/60);
 function createCircle(){
 
+    let nvCercle = document.createElement('div');
+    nvCercle.style.width = '50px';
+    nvCercle.style.height = '50px';
+    nvCercle.style.background = 'red';
+    nvCercle.style.position = 'absolute';
+    nvCercle.style.borderRadius = '50%';
+    nvCercle.style.top = '0px';
+    nvCercle.style.left = '0px';
+    let posX = (e.touches[0].clientX - 25);
+    let posY = (e.touches[0].clientY - 25);
 
-   // ctx.fillStyle = obj.color;
-   // ctx.arc(obj.x, obj.y, obj.r, obj.offset + frame / 30, obj.offset + Math.PI + frame / 30);
-
-    ctx.beginPath()
-      ctx.arc(centerX, centerY, 70, 0, 2 * Math.PI);
-      ctx.fillStyle = 'green';
-      ctx.fill();
-      ctx.lineWidth = 5;
-      ctx.strokeStyle = '#003300';
-      ctx.stroke();
-      ctx.closePath();
+    nvCercle.style.transform = `translate(${posX}px, ${posY}px)`;
+    body.appendChild(nvCercle);
+    
 }
