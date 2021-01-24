@@ -18,6 +18,8 @@ let centerY = canvas.height / 2;
 //ToucheMove = evenement après le click glisser le doight sur l'écran
 //TouchEnd = evenement fin du click on relève le doight
 //touchCancel = stop le touche move ou un evenement
+
+//crée un cercle rouge quand tu appuie sur l'écran
 body.addEventListener('touchstart',(e) =>{
     console.log("Clicked");
     let nvCercle = document.createElement('div');
@@ -34,6 +36,7 @@ body.addEventListener('touchstart',(e) =>{
     nvCercle.style.transform = `translate(${posX}px, ${posY}px)`;
     body.appendChild(nvCercle);
 })
+//effect drawn , intanciate plein de cercle noir quand tu gardes appuyé
 body.addEventListener('touchmove',(i) =>{
     let nvCercle = document.createElement('div');
     nvCercle.style.width = '20px';
@@ -53,9 +56,10 @@ function gameLoop(){
     //fonction qui permet d'avoir un fond gris
     ctx.fillStyle = "grey";
     ctx.fillRect(0,0,canvas.width,canvas.height);
-//Fait apparaitre un rectangle violet 
+    //Fait apparaitre un rectangle violet 
     ctx.fillStyle = "purple";
     ctx.fillRect(x,y,50,50);
+    //il change de direction en fonction de son emplacement en fonction de l'écran
     if((x+50+movex >= canvas.width)||(x+movex <= 0))
     {
         movex *= -1;
@@ -64,8 +68,10 @@ function gameLoop(){
     {
         movey *= -1;
     }
+    //change la direction du carré
     x += movex;
     y += movey;
 }
+//permet de rejouer la fonction a chaque frame
 setInterval(gameLoop,1000/60);
 
